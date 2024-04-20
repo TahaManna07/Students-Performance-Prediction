@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .result-card {
+            background-color: #007bff; /* Blue foncé */
+            color: #fff; /* Texte blanc */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: none; /* Désactive les animations */
+        }
+        .result-card h5 {
+            font-size: 24px; /* Agrandir le texte */
+            margin-bottom: 0; /* Supprime la marge en bas */
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 centered">
+                <!-- Card to display prediction result -->
+                <div class="card result-card">
+                    <div class="card-header">
+                        Résultat de la prédiction
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ pred }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</body>
+</html>

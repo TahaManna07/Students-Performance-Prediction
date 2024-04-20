@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction de la performance scolaire</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Inclure Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Q3J1bPK1d2UpwlMEkr1CJlxks5C12AbTKFhCCbyzBCZuypT7ZIkaZVM4h2Zt4DzCJoo/4QJaFIBLCa4RfFsPLA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+   <style>
+        
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation -->
+    {% include 'navbar.html' %}
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h2 class="text-center mb-4">Prédiction de la performance scolaire</h2>
+                    <form action="/predict" method="post">
+                        <div class="form-group">
+                            <label for="gender"><i class="fa fa-user"></i> Genre :</label>
+                            <select name="gender" id="gender" class="form-control" required>
+                                <option value="0">Masculin</option>
+                                <option value="1">Féminin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="StageID"><i class="fa fa-graduation-cap"></i> Niveau scolaire :</label>
+                            <select name="StageID" id="StageID" class="form-control" required>
+                                <option value="-1">Niveau inférieur</option>
+                                <option value="0">Collège</option>
+                                <option value="1">Lycée</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Semester"><i class="fa fa-calendar-alt"></i> Semestre :</label>
+                            <select name="Semester" id="Semester" class="form-control" required>
+                                <option value="0">Semestre 1</option>
+                                <option value="1">Semestre 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Relation"><i class="fa fa-user-friends"></i> Relation avec l'élève :</label>
+                            <select name="Relation" id="Relation" class="form-control" required>
+                                <option value="0">Père</option>
+                                <option value="1">Mère</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="raisedhands"><i class="fa fa-hand-paper"></i> Nombre de fois où la main est levée :</label>
+                            <input type="number" name="raisedhands" id="raisedhands" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="VisITedResources"><i class="fa fa-globe"></i> Ressources visitées :</label>
+                            <input type="number" name="VisITedResources" id="VisITedResources" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="AnnouncementsView"><i class="fa fa-bullhorn"></i> Nombre d'annonces vues :</label>
+                            <input type="number" name="AnnouncementsView" id="AnnouncementsView" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Discussion"><i class="fa fa-comments"></i> Nombre de discussions :</label>
+                            <input type="number" name="Discussion" id="Discussion" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ParentAnsweringSurvey"><i class="fa fa-check-circle"></i> Parent répondant à l'enquête :</label>
+                            <select name="ParentAnsweringSurvey" id="ParentAnsweringSurvey" class="form-control" required>
+                                <option value="1">Oui</option>
+                                <option value="0">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ParentschoolSatisfaction"><i class="fa fa-smile"></i> Satisfaction des parents :</label>
+                            <select name="ParentschoolSatisfaction" id="ParentschoolSatisfaction" class="form-control" required>
+                                <option value="1">Satisfait</option>
+                                <option value="0">Non satisfait</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="StudentAbsenceDays"><i class="fa fa-calendar-times"></i> Jours d'absence de l'élève :</label>
+                            <select name="StudentAbsenceDays" id="StudentAbsenceDays" class="form-control" required>
+                                <option value="0">Moins de 7 jours</option>
+                                <option value="1">Plus de 7 jours</option>
+                            </select>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Prédire</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
