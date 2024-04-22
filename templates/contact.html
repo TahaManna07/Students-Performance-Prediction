@@ -38,7 +38,6 @@
     </style>
 </head>
 <body>
-    <!-- Barre de navigation -->
     {% include 'navbar.html' %}
     
     <div class="container">
@@ -59,11 +58,17 @@
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
         
+        {% if feedback_message %}
+        <div class="alert alert-success" role="alert">
+            {{ feedback_message }}
+        </div>
+        {% endif %}
+        
         <div class="contact-message">
             <p>N'hésitez pas à nous contacter pour toute question, suggestion ou collaboration. Nous sommes là pour vous aider !</p>
         </div>
     </div>
-
+    
     <div class="footer">
         <p>© 2024 Taha Souhail Manna & Meryem Boudri. All rights reserved.</p>
     </div>

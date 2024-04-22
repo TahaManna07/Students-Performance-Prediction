@@ -13,16 +13,15 @@
             height: 100vh;
         }
         .result-card {
-            background-color: #007bff; /* Blue foncé */
-            color: #fff; /* Texte blanc */
+            background-color: #007bff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: none; /* Désactive les animations */
+            animation: none;
         }
         .result-card h5 {
-            font-size: 24px; /* Agrandir le texte */
-            margin-bottom: 0; /* Supprime la marge en bas */
+            font-size: 24px;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -31,18 +30,27 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 centered">
-                <!-- Card to display prediction result -->
-                <div class="card result-card">
+                <div class="card result-card {% if pred == 'Low' %}bg-danger{% elif pred == 'Medium' %}bg-primary{% elif pred == 'High' %}bg-success{% endif %}">
                     <div class="card-header">
                         Résultat de la prédiction
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ pred }}</h5>
+                        <div class="recommendations">
+                            {% if pred == 'Low' %}
+                                <p>Vous devriez envisager d'augmenter votre participation en classe et d'utiliser plus de ressources pédagogiques.</p>
+                            {% elif pred == 'Medium' %}
+                                <p>Continuez à suivre vos progrès et assurez-vous de rester engagé dans votre apprentissage.</p>
+                            {% elif pred == 'High' %}
+                                <p>Félicitations ! Continuez à maintenir votre niveau d'engagement élevé dans vos études.</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 </body>
 </html>

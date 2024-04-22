@@ -5,10 +5,8 @@ import MySQLdb
 
 app = Flask(__name__, static_folder='static')
 
-# Chargez le modèle de prédiction
 model = pickle.load(open('finalModel.pkl', 'rb'))
 
-# Fonction pour encoder les prédictions
 def encode_predictions(pred):
     if pred == 0:
         return 'Medium'
@@ -19,7 +17,6 @@ def encode_predictions(pred):
     else:
         return 'Unknown'
 
-# Fonction pour se connecter à la base de données et insérer les données
 def save_to_database(data):
     conn = MySQLdb.connect(host="localhost", user="root", passwd="", db="studentperformancelogin")
     cursor = conn.cursor()
@@ -35,7 +32,6 @@ def hello_world():
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
     if request.method == 'POST':
-        # Récupérer les données du formulaire
         gender = int(request.form['gender'])
         stage_id = int(request.form['StageID'])
         semester = int(request.form['Semester'])
@@ -48,16 +44,13 @@ def predict():
         parent_school_satisfaction = int(request.form['ParentschoolSatisfaction'])
         student_absence_days = int(request.form['StudentAbsenceDays'])
 
-        # Convertir les données en format numérique
         features = [gender, stage_id, semester, relation, raisedhands, visited_resources, announcements_view,
                     discussion, parent_answering_survey, parent_school_satisfaction, student_absence_days]
         features_numeric = np.array(features, dtype=np.float64).reshape(1, -1)
 
-        # Faire des prédictions en utilisant le modèle
         prediction = model.predict(features_numeric)
         pred_message = encode_predictions(prediction)
 
-        # Sauvegarder les données dans la base de données
         data = (gender, stage_id, semester, relation, raisedhands, visited_resources, announcements_view,
                 discussion, parent_answering_survey, parent_school_satisfaction, student_absence_days, pred_message)
         save_to_database(data)
@@ -72,6 +65,7 @@ def about():
 def contact():
     return render_template('contact.html')
 
+
 @app.route('/submit_contact_form', methods=['POST'])
 def submit_contact_form():
     if request.method == 'POST':
@@ -79,11 +73,9 @@ def submit_contact_form():
         email = request.form['email']
         message = request.form['message']
 
-        # Vous pouvez traiter le formulaire ici, par exemple, envoyer un e-mail, enregistrer les données dans une base de données, etc.
+        feedback_message = "Merci pour votre message. Nous vous répondrons dès que possible !"
+        return render_template('contact.html', feedback_message=feedback_message)
 
-        # Vous pouvez également afficher un message de confirmation ou rediriger l'utilisateur vers une autre page après la soumission du formulaire.
-        return render_template('contact_confirmation.html', name=name)
-    
 
 if __name__ == '__main__':
     app.run()
